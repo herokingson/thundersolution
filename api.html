@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thunder Solution — Slip Verification API (Overview) | บริการเช็คสลิปปลอมอัตโนมัติ</title>
+  <meta name="description"
+    content="แนะนำบริการ Thunder Solution Slip Verification API — Botcheck Slip เช็คสลิปปลอม/สลิปซ้ำอัตโนมัติ เชื่อมต่อรวดเร็ว ปลอดภัย และเหมาะกับร้านค้า/แพลตฟอร์มออนไลน์" />
+  <meta name="keywords"
+    content="Botcheck Slip, เช็คสลิปปลอม, เช็คสลิปอัตโนมัติ, API Check slip อัตโนมัติ, API เช็คสลิปปลอม, Slip verification api, Slip verify api" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Thunder Solution API — Slip Verification" />
+  <meta property="og:description" content="API เช็คสลิปปลอม เช็คสลิปอัตโนมัติ — เอกสารใช้งานและตัวอย่างโค้ด" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://thunder.in.th/api" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            thunder: {
+              bg: "#0A0F0D",        // ดำอมเขียวเข้ม
+              bg2: "#031215",       // ดำอมเขียวอ่อน
+              card: "#0f171b",      // การ์ดเข้ม
+              neon: "#3BCBFF",      // ฟ้านีออน
+              neon2: "#2AA7E6",     // ฟ้ารอง
+              line: "#1E2A35",      // เส้นแบ่ง/ขอบ
+              pale: "#E6F6FF"       // ฟ้าขาวนุ่ม
+            }
+          },
+          boxShadow: { glow: "0 0 0 1px rgba(59,203,255,0.35), 0 20px 60px rgba(59,203,255,0.22)" },
+          backgroundImage: {
+            heroGrad: "radial-gradient(1000px 600px at 90% -10%, rgba(59,203,255,0.22), transparent 40%), radial-gradient(800px 400px at -10% -20%, rgba(59,203,255,0.16), transparent 40%)"
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    html,
+    body {
+      font-family: Anuphan, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+  </style>
+</head>
+
+<body class="bg-thunder-bg text-white selection:bg-thunder-neon/30">
+  <div class="pointer-events-none fixed inset-0 bg-heroGrad"></div>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 border-b border-thunder-line/60 bg-thunder-bg/70 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3 md:px-6">
+      <a href="#" class="flex items-center gap-3">
+        <!-- simple bolt icon -->
+        <!-- <span
+          class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-thunder-neon/90 to-thunder-neon2/80 shadow-glow">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5 text-thunder-bg">
+            <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"></path>
+          </svg>
+        </span> -->
+        <img class="max-h-14 mx-auto hover:opacity-100 hover:grayscale-0 transition object-cover"
+          src="../assets/images/indexv3.png" alt="Client" data-replace-with="logos/indexv3.png" />
+        <span class="text-lg font-semibold tracking-tight">Thunder Solution</span>
+      </a>
+      <nav class="hidden items-center gap-6 md:flex">
+        <a href="#features" class="text-sm text-white/80 hover:text-white">ฟีเจอร์</a>
+        <a href="#how" class="text-sm text-white/80 hover:text-white">Service</a>
+        <a href="#visual-verify" class="text-sm text-white/80 hover:text-white">ตัวอย่าง</a>
+        <a href="#clients" class="text-sm text-white/80 hover:text-white">ลูกค้า</a>
+        <a href="#pricing" class="text-sm text-white/80 hover:text-white">แพ็กเกจราคา</a>
+        <a href="#faq" class="text-sm text-white/80 hover:text-white">FAQ</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="#"
+          class="hidden rounded-lg border border-thunder-line px-3 py-2 text-sm text-white/90 hover:border-thunder-neon/40 md:inline-block">เข้าสู่ระบบ</a>
+        <a href="#pricing"
+          class="rounded-lg bg-thunder-neon px-4 py-2 text-sm font-semibold text-thunder-bg hover:brightness-110">สมัครสมาชิก</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Hero -->
+  <section id="intro" class="relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 -z-10">
+      <svg viewBox="0 0 1600 900" class="h-full w-full" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="g0" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0A0F0D" />
+            <stop offset="100%" stop-color="#0E1512" />
+          </linearGradient>
+          <radialGradient id="g1" cx="90%" cy="0%" r="60%">
+            <stop offset="0%" stop-color="#2AA7E6" stop-opacity="0.32" />
+            <stop offset="100%" stop-color="#2AA7E6" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <rect width="1600" height="900" fill="url(#g0)" />
+        <circle cx="1250" cy="-60" r="560" fill="url(#g1)" />
+        <g stroke="#1E2A35" stroke-opacity="0.5" stroke-width="1">
+          <path d="M0 150 H1600M0 300 H1600M0 450 H1600M0 600 H1600M0 750 H1600" />
+          <path d="M200 0 V900M400 0 V900M600 0 V900M800 0 V900M1000 0 V900M1200 0 V900M1400 0 V900" />
+        </g>
+      </svg>
+    </div>
+
+    <div
+      class="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-4 py-16 text-center md:gap-12 md:px-6 lg:py-24">
+      <div>
+        <div
+          class="inline-flex items-center gap-2 rounded-full border border-thunder-line bg-thunder-bg2 px-3 py-1 text-xs text-white/70">
+          <span class="h-1.5 w-1.5 rounded-full bg-thunder-neon"></span> Botcheck Slip • Slip Verification API
+        </div>
+        <h1 class="mt-4 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+          เช็คสลิปปลอม/สลิปซ้ำ <span
+            class="bg-gradient-to-r from-thunder-neon to-thunder-neon2 bg-clip-text text-transparent">แบบอัตโนมัติ</span>
+        </h1>
+        <p class="mt-4 mx-auto max-w-2xl text-white/70">
+          บริการ API สำหรับธุรกิจที่ต้องการยืนยันธุรกรรมโอนเงินอย่างรวดเร็วและปลอดภัย ลดเคสสลิปปลอม ประหยัดเวลาทีมงาน
+          และเพิ่มความเชื่อมั่นให้ลูกค้า
+        </p>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <a href="#how"
+            class="rounded-xl bg-thunder-neon px-5 py-3 font-semibold text-thunder-bg hover:brightness-110">ดูวิธีทำงาน</a>
+          <a href="#pricing"
+            class="rounded-xl border border-thunder-line px-5 py-3 font-semibold text-white/90 hover:border-thunder-neon/40">เริ่มใช้ฟรี</a>
+        </div>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs text-white/60">
+          <div class="inline-flex items-center gap-1 rounded-md border border-thunder-line/70 px-2 py-1"><span
+              class="h-1.5 w-1.5 rounded-full bg-thunder-neon"></span> Uptime 99.9%</div>
+          <div class="inline-flex items-center gap-1 rounded-md border border-thunder-line/70 px-2 py-1">เฉลี่ย &lt; 500
+            ms/คำขอ</div>
+          <div class="inline-flex items-center gap-1 rounded-md border border-thunder-line/70 px-2 py-1">TLS + Webhook
+            Signature</div>
+        </div>
+        <!-- visual banner -->
+        <div class="relative mx-auto mt-10 max-w-4xl">
+          <div
+            class="pointer-events-none absolute -inset-6 rounded-3xl bg-gradient-to-tr from-thunder-neon/10 to-transparent blur-2xl">
+          </div>
+          <div class="relative overflow-hidden rounded-2xl border border-thunder-line bg-thunder-card p-4 shadow-glow">
+            <img src="../assets/images/api/banner-api-overview.png" alt="Overview mockup"
+              class="h-64 w-full rounded-xl object-cover" data-replace-with="images/banner-api-overview.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing (dark) -->
+  <section id="pricing" class="border-y bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-16 md:px-6">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="text-3xl font-extrabold text-black">แพ็กเกจราคา</h2>
+        <p class="mt-3 text-black/70 ">เลือกแผนให้เหมาะกับปริมาณคำขอของธุรกิจคุณ</p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <!-- Free -->
+        <div class="relative rounded-2xl border border-thunder-line bg-thunder-card p-6 shadow-glow">
+          <div class="mb-2 text-sm text-white/60">เริ่มต้นทดลอง</div>
+          <h3 class="text-xl font-bold">Start</h3>
+          <div class="mt-2 text-3xl font-extrabold text-thunder-neon">฿499<span class="text-base text-white/60"> /
+              เดือน</span></div>
+          <ul class="mt-4 space-y-2 text-sm text-white/80">
+            <li>1,000 คำขอ/เดือน</li>
+            <li>พื้นฐานการตรวจสลิป</li>
+            <li>Sandbox & เอกสาร API</li>
+            <li>อีเมลซัพพอร์ต</li>
+          </ul>
+          <a href="#"
+            class="mt-6 block rounded-xl bg-thunder-neon px-4 py-2 text-center font-semibold text-thunder-bg hover:brightness-110">เริ่มใช้ฟรี</a>
+        </div>
+
+        <!-- Pro (highlight) -->
+        <div class="relative rounded-2xl border-2 border-thunder-neon/50 bg-thunder-card p-6 shadow-glow">
+          <div
+            class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full border border-thunder-line bg-thunder-bg2 px-3 py-1 text-xs text-thunder-neon">
+            แนะนำ</div>
+          <div class="mb-2 text-sm text-white/60">เหมาะกับร้านค้าออนไลน์</div>
+          <h3 class="text-xl font-bold">Pro</h3>
+          <div class="mt-2 text-3xl font-extrabold text-thunder-neon">฿1,490<span class="text-base text-white/60"> /
+              เดือน</span></div>
+          <ul class="mt-4 space-y-2 text-sm text-white/80">
+            <li>50,000 คำขอ/เดือน</li>
+            <li>ตรวจจับสลิปซ้ำขั้นสูง</li>
+            <li>Webhook + บอทเช็คสลิป</li>
+            <li>อัตราการตอบกลับเร็ว</li>
+            <li>ซัพพอร์ตแชท</li>
+          </ul>
+          <a href="#"
+            class="mt-6 block rounded-xl bg-thunder-neon px-4 py-2 text-center font-semibold text-thunder-bg hover:brightness-110">เลือกแผน
+            Pro</a>
+        </div>
+
+        <!-- Business -->
+        <div class="relative rounded-2xl border border-thunder-line bg-thunder-card p-6 shadow-glow">
+          <div class="mb-2 text-sm text-white/60">ระดับองค์กร</div>
+          <h3 class="text-xl font-bold">Business</h3>
+          <div class="mt-2 text-3xl font-extrabold text-thunder-neon">เริ่มต้นที่ ฿4,990<span
+              class="text-base text-white/60"> / เดือน</span></div>
+          <ul class="mt-4 space-y-2 text-sm text-white/80">
+            <li>คำขอ &gt; 200,000 /เดือน</li>
+            <li>SLA/รายงาน & Audit log</li>
+            <li>IP allowlist / RBAC</li>
+            <li>ปรับแต่ง On-prem/Private</li>
+            <li>ทีมซัพพอร์ตเฉพาะทาง</li>
+          </ul>
+          <a href="#"
+            class="mt-6 block rounded-xl border border-thunder-neon/40 px-4 py-2 text-center font-semibold text-thunder-neon hover:bg-thunder-neon/10">คุยกับทีมขาย</a>
+        </div>
+      </div>
+      <p class="mt-6 text-center text-xs text-white/60">*ราคายังไม่รวมภาษีมูลค่าเพิ่ม /
+        เงื่อนไขการใช้งานเป็นไปตามที่บริษัทกำหนด</p>
+    </div>
+  </section>
+  <!-- Benefits -->
+  <section id="benefits" class="pt-8 pb-0 bg-white text-thunder-bg">
+    <div class="mx-auto flex max-w-7xl grid-cols-1 items-center row px-4 py-5 md:gap-12 md:px-6">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="text-3xl font-extrabold">ทำไมต้อง <span
+            class="bg-gradient-to-r from-thunder-neon to-thunder-neon2 bg-clip-text text-transparent">Thunder
+            Solution?</span></h2>
+        <p class="mt-3 text-slate-600">โซลูชันพร้อมใช้สำหรับเช็คสลิปปลอม/ซ้ำ ลดความเสี่ยง เพิ่มความเร็ว
+          และทำงานอัตโนมัติ</p>
+      </div>
+      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <img src="../assets/images/api/service-thunder-api-01.png" alt="ยืนยันแม่นยำ" class="mb-3 w-full mx-auto"
+            data-replace-with="images/service-thunder-api-01" />
+          <h3 class="font-semibold">ยืนยันธุรกรรมแม่นยำ</h3>
+          <p class="mt-1 text-sm text-slate-600">ตรวจจับสลิปปลอม/สลิปซ้ำ เทียบเวลา จำนวนเงิน และเลขอ้างอิง</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <img src="../assets/images/api/service-thunder-api-02.png" alt="เร็วและอัตโนมัติ" class="mb-3 w-full mx-auto"
+            data-replace-with="images/service-thunder-api-02" />
+          <h3 class="font-semibold">เร็วและอัตโนมัติ</h3>
+          <p class="mt-1 text-sm text-slate-600">ตอบกลับไว &lt; 500 ms พร้อมบอทแจ้งผลและ Webhook</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <img src="../assets/images/api/service-thunder-api-03.png" alt="ปลอดภัย" class="mb-3 w-full mx-auto"
+            data-replace-with="images/service-thunder-api-03" />
+          <h3 class="font-semibold">ปลอดภัยระดับองค์กร</h3>
+          <p class="mt-1 text-sm text-slate-600">TLS, ลายเซ็น Webhook, RBAC และ IP allowlist</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Businesses (ลูกค้าของเรา) -->
+  <section id="businesses" class="py-16 bg-white text-thunder-bg">
+    <div class="mx-auto max-w-7xl px-4 md:px-6">
+      <div class="text-center">
+        <div class="text-xs tracking-[0.25em] text-slate-400">BUSINESS</div>
+        <h2 class="mt-2 text-3xl font-extrabold">ธุรกิจที่มาใช้บริการเรา</h2>
+        <p class="mt-2 text-slate-600">ตัวอย่างธุรกิจที่ใช้บริการ <span class="font-semibold">Slip Verification /
+            EasySlip</span></p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <!-- Card -->
+        <div
+          class="rounded-2xl bg-thunder-neon2 text-white p-6 shadow-[0_6px_24px_rgba(42,167,230,0.25)] border border-sky-200/30">
+          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white text-thunder-neon2">
+            <!-- restaurant icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
+              <path
+                d="M11 2h2v9a2 2 0 11-4 0V2h2zm8 0h2v9a2 2 0 11-4 0V8h-2V2h2v4h2V2zM3 4h2v6a4 4 0 104 4V4h2v14h-2v-4a6 6 0 01-6-6V4z" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold">ร้านอาหาร</h3>
+          <p class="mt-2 text-white/90">เก็บทุกยอดสแกน ทุกรายการ และนำมาแสดงผลให้คุณ หมดปัญหาการโกง</p>
+        </div>
+        <!-- Card -->
+        <div
+          class="rounded-2xl bg-thunder-neon2 text-white p-6 shadow-[0_6px_24px_rgba(42,167,230,0.25)] border border-sky-200/30">
+          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white text-thunder-neon2">
+            <!-- cart icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
+              <path d="M7 4h-2l-1 2h2l3 7h8l3-7H7zm2 13a2 2 0 100 4 2 2 0 000-4zm8 0a2 2 0 100 4 2 2 0 000-4z" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold">ธุรกิจออนไลน์</h3>
+          <p class="mt-2 text-white/90">หมดปัญหาสลิปปลอม ช่วยให้คุณประหยัดเวลา เพื่อนำไปต่อยอดธุรกิจ</p>
+        </div>
+        <!-- Card -->
+        <div
+          class="rounded-2xl bg-thunder-neon2 text-white p-6 shadow-[0_6px_24px_rgba(42,167,230,0.25)] border border-sky-200/30">
+          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white text-thunder-neon2">
+            <!-- users icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
+              <path
+                d="M16 11a4 4 0 10-8 0 4 4 0 008 0zm-6 5a6 6 0 00-6 6h2a4 4 0 014-4h4a4 4 0 014 4h2a6 6 0 00-6-6H10z" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold">ธุรกิจบริการ</h3>
+          <p class="mt-2 text-white/90">เรารวบรวมทุกรายการ เพื่อให้คุณบริหารง่าย ภายในที่เดียว</p>
+        </div>
+        <!-- Card -->
+        <div
+          class="rounded-2xl bg-thunder-neon2 text-white p-6 shadow-[0_6px_24px_rgba(42,167,230,0.25)] border border-sky-200/30">
+          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white text-thunder-neon2">
+            <!-- store icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
+              <path d="M4 4h16l-1 6H5L4 4zm1 8h14v8H5v-8z" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold">ธุรกิจค้าขาย</h3>
+          <p class="mt-2 text-white/90">จะขายเยอะแค่ไหนก็ไม่หวั่น เราพร้อมสรุปยอดให้คุณ</p>
+        </div>
+        <!-- Card -->
+        <div
+          class="rounded-2xl bg-thunder-neon2 text-white p-6 shadow-[0_6px_24px_rgba(42,167,230,0.25)] border border-sky-200/30">
+          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white text-thunder-neon2">
+            <!-- hotel icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
+              <path d="M3 11h18v10h-2v-4h-4v4h-2v-4H7v4H5V11zm2-7h2v4H5V4zm10 0h2v4h-2V4z" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold">ธุรกิจโรงแรม</h3>
+          <p class="mt-2 text-white/90">ลูกค้าจะบิดจำนวนขนาดไหน เราก็เก็บยอดให้คุณได้</p>
+        </div>
+        <!-- Card -->
+        <div
+          class="rounded-2xl bg-thunder-neon2 text-white p-6 shadow-[0_6px_24px_rgba(42,167,230,0.25)] border border-sky-200/30">
+          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white text-thunder-neon2">
+            <!-- gym icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
+              <path d="M7 7h2v10H7V7zm8 0h2v10h-2V7zM3 10h2v4H3v-4zm16 0h2v4h-2v-4zM10 9h4v6h-4V9z" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold">ธุรกิจกีฬา</h3>
+          <p class="mt-2 text-white/90">เรารวบรวมทุกยอดใช้บริการ และรวมมาให้คุณเพื่อให้จัดการได้ง่าย</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works (3 steps) -->
+  <section id="how" class="border-y border-thunder-line/60 bg-thunder-bg">
+    <div class="mx-auto max-w-7xl px-4 py-16 md:px-6">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div class="md:col-span-1">
+          <h2 class="text-3xl font-extrabold">ทำงานอย่างไร</h2>
+          <p class="mt-3 text-white/70">ตั้งค่าเพียงไม่กี่นาที ก็พร้อมใช้งานกับเว็บไซต์/ระบบหลังบ้านของคุณ</p>
+        </div>
+        <div class="md:col-span-2 grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <div class="rounded-2xl border border-thunder-line bg-thunder-card p-5">
+            <div
+              class="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-thunder-neon/15 text-thunder-neon">
+              1</div>
+            <h3 class="font-semibold">สมัคร & รับ API Key</h3>
+            <p class="mt-1 text-sm text-white/70">ลงทะเบียน เลือกแพ็กเกจ และสร้าง API key ในแดชบอร์ด</p>
+          </div>
+          <div class="rounded-2xl border border-thunder-line bg-thunder-card p-5">
+            <div
+              class="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-thunder-neon/15 text-thunder-neon">
+              2</div>
+            <h3 class="font-semibold">เชื่อมต่อระบบของคุณ</h3>
+            <p class="mt-1 text-sm text-white/70">อัปโหลดสลิป/ส่งข้อมูลธุรกรรม เรียก API verify เพื่อยืนยัน</p>
+          </div>
+          <div class="rounded-2xl border border-thunder-line bg-thunder-card p-5">
+            <div
+              class="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-thunder-neon/15 text-thunder-neon">
+              3</div>
+            <h3 class="font-semibold">รับผลตรวจทันที</h3>
+            <p class="mt-1 text-sm text-white/70">ตัดสินใจได้ทันทีว่าธุรกรรมถูกต้อง ซ้ำ หรือเสี่ยง</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Integrations / Simple code teaser -->
+  <section id="integrations" class="py-14 border-t border-thunder-line/60">
+    <div class="mx-auto flex max-w-7xl flex-col items-center  px-4 py-16  md:px-6 lg:pt-16 lg:pb-5">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="text-3xl font-extrabold">เชื่อมง่าย เข้ากับสแต็กของคุณ</h2>
+        <p class="mt-2 text-white/70">REST/JSON + Webhook + ตัวอย่างโค้ดหลายภาษา</p>
+      </div>
+
+      <!-- logos strip -->
+      <div
+        class="mx-auto mt-5 max-w-5xl overflow-hidden rounded-2xl border border-thunder-line bg-thunder-card p-3 shadow-glow">
+        <img src="../assets/images/api/concept-platform-01.png" alt="แพลตฟอร์มที่เชื่อมต่อได้"
+          class=" w-[500px] rounded-xl object-contain" data-replace-with="images/concept-platform-01" />
+      </div>
+
+      <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div class="rounded-2xl border border-thunder-line bg-thunder-card p-4 shadow-glow">
+          <div class="text-xs text-white/60">Node.js</div>
+          <pre class="mt-2 overflow-x-auto rounded bg-black/60 p-3 text-[12px] text-thunder-pale"><code>await fetch("https://api.thunder.in.th/v1/slip/verify",{method:"POST",
+ headers:{Authorization:"Bearer &lt;KEY&gt;","Content-Type":"application/json"},
+ body:JSON.stringify({bank:"kbank",amount:590,ref_no:"KBANK-102233",slip_image:"&lt;base64&gt;"})});</code></pre>
+        </div>
+        <div class="rounded-2xl border border-thunder-line bg-thunder-card p-4 shadow-glow">
+          <div class="text-xs text-white/60">Webhook (payload)</div>
+          <pre
+            class="mt-2 overflow-x-auto rounded bg-black/60 p-3 text-[12px] text-thunder-pale"><code>{"event":"slip.verified","data":{"valid":true,"duplicate":false,"risk_score":0.02}}</code></pre>
+        </div>
+      </div>
+      <div class="mt-6 text-center text-sm text-white/60">รองรับการแจ้งผลผ่าน LINE/Discord/Telegram (บอท)</div>
+    </div>
+  </section>
+
+
+
+  <!-- FAQ -->
+  <section id="faq" class="py-14 bg-white text-thunder-bg border-t border-slate-200">
+    <div class="mx-auto max-w-7xl px-4 md:px-6">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="text-3xl font-extrabold">คำถามที่พบบ่อย</h2>
+      </div>
+      <div class="mx-auto mt-6 max-w-3xl space-y-3">
+        <details class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <summary class="flex cursor-pointer items-center justify-between gap-4"><span
+              class="font-semibold">รองรับธนาคารอะไรบ้าง?</span><span
+              class="text-thunder-neon transition-transform group-open:rotate-45">+</span></summary>
+          <div class="mt-3 text-sm text-slate-600">รองรับธนาคารหลักในประเทศไทย และเพิ่มได้เรื่อย ๆ
+            ดูรายละเอียดในเอกสาร</div>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <summary class="flex cursor-pointer items-center justify-between gap-4"><span
+              class="font-semibold">ความปลอดภัยเป็นอย่างไร?</span><span
+              class="text-thunder-neon transition-transform group-open:rotate-45">+</span></summary>
+          <div class="mt-3 text-sm text-slate-600">TLS, Webhook Signature, RBAC, IP allowlist และบันทึกกิจกรรม</div>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <summary class="flex cursor-pointer items-center justify-between gap-4"><span class="font-semibold">มี SDK
+              ไหม เชื่อมยากหรือเปล่า?</span><span
+              class="text-thunder-neon transition-transform group-open:rotate-45">+</span></summary>
+          <div class="mt-3 text-sm text-slate-600">เชื่อมผ่าน REST/JSON ง่ายมาก มีตัวอย่างโค้ด และ Sandbox ให้ทดสอบ
+          </div>
+        </details>
+        <details class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <summary class="flex cursor-pointer items-center justify-between gap-4"><span
+              class="font-semibold">คิดราคาอย่างไร?</span><span
+              class="text-thunder-neon transition-transform group-open:rotate-45">+</span></summary>
+          <div class="mt-3 text-sm text-slate-600">คิดตามจำนวนคำขอ/เดือน มีแผน Free/Pro/Business</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Pricing -->
+  <section id="pricing" class="relative border-y border-thunder-line/60 bg-thunder-bg">
+    <div
+      class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(50%_40%_at_20%_0%,rgba(59,203,255,0.12),transparent_60%)]">
+    </div>
+    <div class="mx-auto max-w-7xl px-4 py-16 md:px-6">
+      <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
+        <div class="order-2 md:order-1">
+          <h2 class="text-3xl font-extrabold">เริ่มใช้ API ฟรี — อัปเกรดเมื่อโต</h2>
+          <p class="mt-3 text-white/70">Free 1,000 คำขอ/เดือน • Pro/Business พร้อม SLA และปรับเพิ่ม rate limit ได้</p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="#" class="rounded-lg bg-thunder-neon px-5 py-3 font-semibold text-thunder-bg">สมัครใช้งาน</a>
+            <a href="#"
+              class="rounded-lg border border-thunder-line px-5 py-3 font-semibold text-white/90 hover:border-thunder-neon/40">คุยกับทีมขาย</a>
+          </div>
+        </div>
+        <div class="order-1 md:order-2">
+          <div class="relative overflow-hidden rounded-2xl border border-thunder-line bg-thunder-card p-4 shadow-glow">
+            <img class="h-64 w-full rounded-xl object-cover" src="../assets/images/api/calltoactionapi.png"
+              alt="Call to action" data-replace-with="images/calltoactionapi.png" />
+            <div
+              class="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-t from-thunder-bg/40 to-transparent">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-thunder-bg">
+    <div class="mx-auto max-w-7xl px-4 py-10 md:px-6">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-3">
+            <!-- <span
+              class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-thunder-neon to-thunder-neon2">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4 text-thunder-bg">
+                <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"></path>
+              </svg>
+            </span> -->
+            <img class="max-h-24 hover:opacity-100 hover:grayscale-0 transition object-cover"
+              src="../assets/images/indexv3.png" alt="Client" data-replace-with="logos/indexv3.png" />
+            <!-- <span class="text-lg font-semibold">Thunder Solution</span> -->
+          </div>
+          <p class="mt-3 max-w-md text-sm text-white/70">บริการ API ตรวจสอบสลิปโอนเงิน & บอทเช็คสลิป
+            ช่วยให้ธุรกิจของคุณมั่นใจได้ทุกธุรกรรม</p>
+        </div>
+        <div>
+          <h4 class="font-semibold">เมนู</h4>
+          <ul class="mt-3 space-y-2 text-sm text-white/70">
+            <li><a href="#features" class="hover:text-white">ฟีเจอร์</a></li>
+            <li><a href="#api" class="hover:text-white">API</a></li>
+            <li><a href="#pricing" class="hover:text-white">แพ็กเกจราคา</a></li>
+            <li><a href="#faq" class="hover:text-white">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold">ติดต่อ</h4>
+          <ul class="mt-3 space-y-2 text-sm text-white/70">
+            <li>อีเมล: support@thunder.in.th</li>
+            <li>เว็บไซต์: thunder.in.th</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-8 border-t border-thunder-line/60 pt-6 text-xs text-white/50">
+        © <span id="year"></span> Thunder Solution. สงวนลิขสิทธิ์.
+      </div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
+</body>
+
+</html>
