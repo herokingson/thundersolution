@@ -153,12 +153,102 @@
     </div>
   </section>
 
+  <!-- Integrations / Simple code teaser -->
+  <section id="integrations" class="py-14 border-t border-thunder-line/60  bg-white">
+    <div class="mx-auto flex max-w-7xl flex-col items-center  px-4 py-16  md:px-6 lg:pt-16 lg:pb-5">
+      <div class="mx-auto max-w-3xl text-center text-black">
+        <h2 class="text-3xl font-extrabold">เชื่อมง่าย เข้ากับสแต็กของคุณ</h2>
+        <p class="mt-2">REST/JSON + Webhook + ตัวอย่างโค้ดหลายภาษา</p>
+      </div>
+      <div class="flex flex-row justify-between items-start gap-10">
+        <!-- logos strip & Auth -->
+        <div class="w-2/5">
+
+          <!-- logos strip -->
+          <div
+            class="mx-auto mt-5 overflow-hidden rounded-2xl border border-thunder-line bg-thunder-card p-3 shadow-glow">
+            <img src="./assets/images/api/concept-platform-01.png" alt="แพลตฟอร์มที่เชื่อมต่อได้"
+              class=" w-full rounded-xl object-contain" data-replace-with="images/concept-platform-01" />
+          </div>
+
+          <!-- Auth -->
+          <div id="auth"
+            class="max-w-5xl w-full mt-5 rounded-2xl border border-thunder-line bg-thunder-card p-6 shadow-glow">
+            <h2 class="text-2xl font-bold">การยืนยันตัวตน</h2>
+            <p class="mt-2 text-white/70">ใช้ <code>Authorization: Bearer &lt;API_KEY&gt;</code> ในทุกคำขอผ่าน HTTPS
+              (TLS)
+            </p>
+            <pre
+              class="mt-4 overflow-x-auto rounded-lg bg-thunder-bg2 p-4 text-[13px] leading-relaxed text-thunder-pale"><code>curl -H "Authorization: Bearer &lt;YOUR_API_KEY&gt;" https://api.thunder.in.th/v1/health</code></pre>
+          </div>
+        </div>
+
+        <!-- Endpoint & Security -->
+        <div class="gap-10">
+          <!-- Endpoints -->
+          <div id="endpoints"
+            class="max-w-5xl w-full mt-5 rounded-2xl border border-thunder-line bg-thunder-card p-6 shadow-glow">
+            <h2 class="text-2xl font-bold">Endpoints</h2>
+            <div class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div class="rounded-xl border border-thunder-line bg-thunder-bg2 p-4">
+                <div class="text-xs text-white/60">POST</div>
+                <div class="mt-1 font-semibold text-thunder-neon">/v1/slip/verify</div>
+                <p class="mt-2 text-sm text-white/70">ตรวจสอบสลิปจากรูปภาพหรือข้อมูลธุรกรรม</p>
+                <pre class="mt-3 overflow-x-auto rounded bg-black/60 p-3 text-[12px] text-thunder-pale"><code>{
+    "bank": "kbank",
+    "transferred_at": "2025-08-21T10:15:33+07:00",
+    "amount": 590.00,
+    "ref_no": "KBANK-102233",
+    "slip_image": "&lt;base64&gt;"
+  }</code></pre>
+              </div>
+
+              <div class="rounded-xl border border-thunder-line bg-thunder-bg2 p-4">
+                <div class="text-xs text-white/60">POST</div>
+                <div class="mt-1 font-semibold text-thunder-neon">/v1/slip/ocr</div>
+                <p class="mt-2 text-sm text-white/70">ดึงข้อความ/ข้อมูลจากภาพสลิป (OCR)</p>
+                <pre class="mt-3 overflow-x-auto rounded bg-black/60 p-3 text-[12px] text-thunder-pale"><code>{
+    "slip_image": "&lt;base64&gt;"
+  }</code></pre>
+              </div>
+
+              <div class="rounded-xl border border-thunder-line bg-thunder-bg2 p-4">
+                <div class="text-xs text-white/60">GET</div>
+                <div class="mt-1 font-semibold text-thunder-neon">/v1/transactions/:id</div>
+                <p class="mt-2 text-sm text-white/70">ดูผลตรวจธุรกรรมย้อนหลัง</p>
+              </div>
+
+              <div class="rounded-xl border border-thunder-line bg-thunder-bg2 p-4">
+                <div class="text-xs text-white/60">POST</div>
+                <div class="mt-1 font-semibold text-thunder-neon">/v1/webhooks/test</div>
+                <p class="mt-2 text-sm text-white/70">ยิงทดสอบ Webhook เพื่อเช็คการรับส่ง</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security -->
+          <div id="security" class="mt-5 rounded-2xl border border-thunder-line bg-thunder-card p-6 shadow-glow">
+            <h2 class="text-2xl font-bold">ความปลอดภัย</h2>
+            <ul class="mt-2 list-inside list-disc text-white/70">
+              <li>ทุกคำขอผ่าน TLS</li>
+              <li>Webhook มีการลงลายเซ็น (HMAC) ตรวจสอบฝั่งผู้รับ</li>
+              <li>รองรับ IP allowlist และ Role-based Access (ตามแพ็กเกจ)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="mt-6 text-center text-sm text-black/90">รองรับการแจ้งผลผ่าน LINE/Discord/Telegram (บอท)</div>
+    </div>
+  </section>
+
   <!-- Pricing (dark) -->
-  <section id="pricing" class="border-y bg-white">
+  <section id="pricing" class="border-y ">
     <div class="mx-auto max-w-7xl px-4 py-16 md:px-6">
       <div class="mx-auto max-w-3xl text-center">
-        <h2 class="text-3xl font-extrabold text-black">แพ็กเกจราคา</h2>
-        <p class="mt-3 text-black/70 ">เลือกแผนให้เหมาะกับปริมาณคำขอของธุรกิจคุณ</p>
+        <h2 class="text-3xl font-extrabold text-white">แพ็กเกจราคา</h2>
+        <p class="mt-3 text-white/70 ">เลือกแผนให้เหมาะกับปริมาณคำขอของธุรกิจคุณ</p>
       </div>
 
       <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -220,10 +310,11 @@
         เงื่อนไขการใช้งานเป็นไปตามที่บริษัทกำหนด</p>
     </div>
   </section>
+
   <!-- Benefits -->
   <section id="benefits" class="pt-8 pb-0 bg-white text-thunder-bg">
     <div class="mx-auto flex max-w-7xl grid-cols-1 items-center row px-4 py-5 md:gap-12 md:px-6">
-      <div class="mx-auto max-w-3xl text-center">
+      <div class="mx-auto text-center">
         <h2 class="text-3xl font-extrabold">ทำไมต้อง <span
             class="bg-gradient-to-r from-thunder-neon to-thunder-neon2 bg-clip-text text-transparent">Thunder
             Solution?</span></h2>
@@ -376,39 +467,6 @@
       </div>
     </div>
   </section>
-  <!-- Integrations / Simple code teaser -->
-  <section id="integrations" class="py-14 border-t border-thunder-line/60">
-    <div class="mx-auto flex max-w-7xl flex-col items-center  px-4 py-16  md:px-6 lg:pt-16 lg:pb-5">
-      <div class="mx-auto max-w-3xl text-center">
-        <h2 class="text-3xl font-extrabold">เชื่อมง่าย เข้ากับสแต็กของคุณ</h2>
-        <p class="mt-2 text-white/70">REST/JSON + Webhook + ตัวอย่างโค้ดหลายภาษา</p>
-      </div>
-
-      <!-- logos strip -->
-      <div
-        class="mx-auto mt-5 max-w-5xl overflow-hidden rounded-2xl border border-thunder-line bg-thunder-card p-3 shadow-glow">
-        <img src="./assets/images/api/concept-platform-01.png" alt="แพลตฟอร์มที่เชื่อมต่อได้"
-          class=" w-[500px] rounded-xl object-contain" data-replace-with="images/concept-platform-01" />
-      </div>
-
-      <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-        <div class="rounded-2xl border border-thunder-line bg-thunder-card p-4 shadow-glow">
-          <div class="text-xs text-white/60">Node.js</div>
-          <pre class="mt-2 overflow-x-auto rounded bg-black/60 p-3 text-[12px] text-thunder-pale"><code>await fetch("https://api.thunder.in.th/v1/slip/verify",{method:"POST",
- headers:{Authorization:"Bearer &lt;KEY&gt;","Content-Type":"application/json"},
- body:JSON.stringify({bank:"kbank",amount:590,ref_no:"KBANK-102233",slip_image:"&lt;base64&gt;"})});</code></pre>
-        </div>
-        <div class="rounded-2xl border border-thunder-line bg-thunder-card p-4 shadow-glow">
-          <div class="text-xs text-white/60">Webhook (payload)</div>
-          <pre
-            class="mt-2 overflow-x-auto rounded bg-black/60 p-3 text-[12px] text-thunder-pale"><code>{"event":"slip.verified","data":{"valid":true,"duplicate":false,"risk_score":0.02}}</code></pre>
-        </div>
-      </div>
-      <div class="mt-6 text-center text-sm text-white/60">รองรับการแจ้งผลผ่าน LINE/Discord/Telegram (บอท)</div>
-    </div>
-  </section>
-
-
 
   <!-- FAQ -->
   <section id="faq" class="py-14 bg-white text-thunder-bg border-t border-slate-200">
