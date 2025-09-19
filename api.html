@@ -265,7 +265,7 @@
             <li>อีเมลซัพพอร์ต</li>
           </ul>
           <a href="#"
-            class="mt-6 block rounded-xl bg-thunder-neon px-4 py-2 text-center font-semibold text-thunder-bg hover:brightness-110">เริ่มใช้ฟรี</a>
+            class="mt-6 block rounded-xl bg-thunder-neon px-4 py-2 text-center font-semibold text-thunder-bg hover:brightness-110 md:absolute md:w-[90%] md:bottom-6 left-5">เริ่มใช้ฟรี</a>
         </div>
 
         <!-- Pro (highlight) -->
@@ -471,36 +471,111 @@
   <!-- FAQ -->
   <section id="faq" class="py-14 bg-white text-thunder-bg border-t border-slate-200">
     <div class="mx-auto max-w-7xl px-4 md:px-6">
-      <div class="mx-auto max-w-3xl text-center">
-        <h2 class="text-3xl font-extrabold">คำถามที่พบบ่อย</h2>
-      </div>
-      <div class="mx-auto mt-6 max-w-3xl space-y-3">
-        <details class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-          <summary class="flex cursor-pointer items-center justify-between gap-4"><span
-              class="font-semibold">รองรับธนาคารอะไรบ้าง?</span><span
-              class="text-thunder-neon transition-transform group-open:rotate-45">+</span></summary>
-          <div class="mt-3 text-sm text-slate-600">รองรับธนาคารหลักในประเทศไทย และเพิ่มได้เรื่อย ๆ
-            ดูรายละเอียดในเอกสาร</div>
-        </details>
-        <details class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-          <summary class="flex cursor-pointer items-center justify-between gap-4"><span
-              class="font-semibold">ความปลอดภัยเป็นอย่างไร?</span><span
-              class="text-thunder-neon transition-transform group-open:rotate-45">+</span></summary>
-          <div class="mt-3 text-sm text-slate-600">TLS, Webhook Signature, RBAC, IP allowlist และบันทึกกิจกรรม</div>
-        </details>
-        <details class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-          <summary class="flex cursor-pointer items-center justify-between gap-4"><span class="font-semibold">มี SDK
-              ไหม เชื่อมยากหรือเปล่า?</span><span
-              class="text-thunder-neon transition-transform group-open:rotate-45">+</span></summary>
-          <div class="mt-3 text-sm text-slate-600">เชื่อมผ่าน REST/JSON ง่ายมาก มีตัวอย่างโค้ด และ Sandbox ให้ทดสอบ
+      <div class="grid grid-cols-5 gap-10">
+        <div class="md:col-span-3 space-y-6 w-auto">
+          <div class="mx-auto max-w-3xl text-center">
+            <h2 class="text-3xl font-extrabold">คำถามที่พบบ่อย</h2>
           </div>
-        </details>
-        <details class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-          <summary class="flex cursor-pointer items-center justify-between gap-4"><span
-              class="font-semibold">คิดราคาอย่างไร?</span><span
-              class="text-thunder-neon transition-transform group-open:rotate-45">+</span></summary>
-          <div class="mt-3 text-sm text-slate-600">คิดตามจำนวนคำขอ/เดือน มีแผน Free/Pro/Business</div>
-        </details>
+          <div class="mx-auto mt-6 max-w-3xl space-y-3">
+            <details class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+              <summary class="flex cursor-pointer items-center justify-between gap-4"><span
+                  class="font-semibold">รองรับธนาคารอะไรบ้าง?</span><span
+                  class="text-thunder-neon transition-transform group-open:rotate-45">+</span></summary>
+              <div class="mt-3 text-sm text-slate-600">รองรับธนาคารหลักในประเทศไทย และเพิ่มได้เรื่อย ๆ
+                ดูรายละเอียดในเอกสาร</div>
+            </details>
+            <details class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+              <summary class="flex cursor-pointer items-center justify-between gap-4"><span
+                  class="font-semibold">ความปลอดภัยเป็นอย่างไร?</span><span
+                  class="text-thunder-neon transition-transform group-open:rotate-45">+</span></summary>
+              <div class="mt-3 text-sm text-slate-600">TLS, Webhook Signature, RBAC, IP allowlist และบันทึกกิจกรรม</div>
+            </details>
+            <details class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+              <summary class="flex cursor-pointer items-center justify-between gap-4"><span class="font-semibold">มี SDK
+                  ไหม เชื่อมยากหรือเปล่า?</span><span
+                  class="text-thunder-neon transition-transform group-open:rotate-45">+</span></summary>
+              <div class="mt-3 text-sm text-slate-600">เชื่อมผ่าน REST/JSON ง่ายมาก มีตัวอย่างโค้ด และ Sandbox ให้ทดสอบ
+              </div>
+            </details>
+            <details class="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+              <summary class="flex cursor-pointer items-center justify-between gap-4"><span
+                  class="font-semibold">คิดราคาอย่างไร?</span><span
+                  class="text-thunder-neon transition-transform group-open:rotate-45">+</span></summary>
+              <div class="mt-3 text-sm text-slate-600">คิดตามจำนวนคำขอ/เดือน มีแผน Free/Pro/Business</div>
+            </details>
+          </div>
+        </div>
+        <div class="w-auto md:col-span-2">
+          <!-- Contact Form -->
+          <div class="mx-auto w-full mx-auto">
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h3 class="text-2xl font-extrabold">สนใจสอบถามข้อมูล</h3>
+              <p class="mt-1 text-sm text-slate-600">กรอกข้อมูลติดต่อ ทีมงานจะติดต่อกลับภายใน 1 วันทำการ</p>
+              <form class="mt-5 space-y-4" action="#" method="post">
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div>
+                    <label class="mb-1 block text-sm font-medium text-slate-700">ชื่อ-นามสกุล</label>
+                    <input type="text" name="name" required
+                      class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none focus:border-thunder-neon focus:ring-2 focus:ring-thunder-neon/40"
+                      placeholder="เช่น กิตติพงศ์ ใจดี" />
+                  </div>
+                  <div>
+                    <label class="mb-1 block text-sm font-medium text-slate-700">อีเมล</label>
+                    <input type="email" name="email" required
+                      class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none focus:border-thunder-neon focus:ring-2 focus:ring-thunder-neon/40"
+                      placeholder="you@company.com" />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div>
+                    <label class="mb-1 block text-sm font-medium text-slate-700">เบอร์ติดต่อ</label>
+                    <input type="tel" name="phone"
+                      class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none focus:border-thunder-neon focus:ring-2 focus:ring-thunder-neon/40"
+                      placeholder="08x-xxx-xxxx" />
+                  </div>
+                  <div>
+                    <label class="mb-1 block text-sm font-medium text-slate-700">องค์กร/ร้านค้า</label>
+                    <input type="text" name="company"
+                      class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none focus:border-thunder-neon focus:ring-2 focus:ring-thunder-neon/40"
+                      placeholder="เช่น Thunder Co., Ltd." />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="mb-1 block text-sm font-medium text-slate-700">สนใจแพ็กเกจ</label>
+                  <select name="plan"
+                    class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none focus:border-thunder-neon focus:ring-2 focus:ring-thunder-neon/40">
+                    <option value="free">Free</option>
+                    <option value="pro">Pro</option>
+                    <option value="business">Business</option>
+                    <option value="not-sure">ยังไม่แน่ใจ</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="mb-1 block text-sm font-medium text-slate-700">รายละเอียดเพิ่มเติม</label>
+                  <textarea name="message" rows="4"
+                    class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none focus:border-thunder-neon focus:ring-2 focus:ring-thunder-neon/40"
+                    placeholder="เล่าเคสธุรกิจ/จำนวนคำขอโดยประมาณ หรือระบบที่ต้องการเชื่อม"></textarea>
+                </div>
+
+                <div class="flex items-start gap-2">
+                  <input id="consent" type="checkbox" required
+                    class="mt-1 h-4 w-4 rounded border-slate-300 text-thunder-neon focus:ring-thunder-neon" />
+                  <label for="consent" class="text-sm text-slate-600">ยอมรับให้ติดต่อกลับตามข้อมูลที่ระบุไว้
+                    และยินยอมตามนโยบายความเป็นส่วนตัว</label>
+                </div>
+
+                <button type="submit"
+                  class="w-full rounded-xl bg-thunder-neon px-5 py-3 font-semibold text-thunder-bg hover:brightness-110">ส่งคำขอข้อมูล</button>
+                <p class="text-center text-xs text-slate-500">หรืออีเมลหาเราได้ที่ <a
+                    href="mailto:support@thunder.in.th" class="text-thunder-neon underline">support@thunder.in.th</a>
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
